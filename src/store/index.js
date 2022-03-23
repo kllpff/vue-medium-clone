@@ -1,14 +1,16 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
+import auth from '@/store/modules/auth'
+import feed from '@/store/modules/feed'
+import tags from '@/store/modules/tags'
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
   modules: {
-  }
+    auth,
+    feed,
+    tags,
+  },
 })

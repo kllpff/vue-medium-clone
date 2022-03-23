@@ -1,25 +1,70 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import {createRouter, createWebHashHistory} from 'vue-router'
+import GlobalFeed from '@/views/GlobalFeed'
+import Register from '@/views/Register'
+import Login from '@/views/Login'
+import YourFeed from '@/views/YourFeed'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'globalFeed',
+    component: GlobalFeed,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/register',
+    name: 'register',
+    component: Register,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: Login,
+  },
+  {
+    path: '/:slug',
+    name: 'userProfile',
+    component: Login,
+  },
+  {
+    path: '/profiles/:slug/favorites',
+    name: 'userProfileFavorites',
+    component: Login,
+  },
+  {
+    path: '/feed',
+    name: 'yourFeed',
+    component: YourFeed,
+  },
+  {
+    path: '/tags/:slug',
+    name: 'tag',
+    component: GlobalFeed,
+  },
+  {
+    path: '/articles/new',
+    name: 'createArticle',
+    component: GlobalFeed,
+  },
+  {
+    path: '/articles/:slug',
+    name: 'article',
+    component: GlobalFeed,
+  },
+  {
+    path: '/articles/:slug/edit',
+    name: 'editArticle',
+    component: GlobalFeed,
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router
