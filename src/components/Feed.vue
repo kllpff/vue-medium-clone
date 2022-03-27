@@ -26,7 +26,13 @@
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <div class="pull-xs-right">ADD TO FAVORITES</div>
+          <div class="pull-xs-right">
+            <mcv-add-to-favorites
+              :is-favorited="article.favorited"
+              :article-slug="article.slug"
+              :favorites-count="article.favoritesCount"
+            />
+          </div>
         </div>
         <router-link
           class="preview-link"
@@ -35,7 +41,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          TAG LIST
+          <mcv-tags v-if="article.tagList" :tags="article.tagList" />
         </router-link>
       </div>
 
@@ -57,10 +63,18 @@ import {limit} from '@/helpers/vars'
 import {stringify, parseUrl} from 'query-string'
 import McvLoading from '@/components/Loading'
 import McvErrorMessage from '@/components/ErrorMessage'
+import McvTags from '@/components/Tags'
+import McvAddToFavorites from '@/components/AddToFavorites'
 
 export default {
   name: 'McvFeed',
-  components: {McvErrorMessage, McvLoading, McvPagination},
+  components: {
+    McvTags,
+    McvErrorMessage,
+    McvLoading,
+    McvPagination,
+    McvAddToFavorites,
+  },
 
   props: {
     apiUrl: {
@@ -79,7 +93,7 @@ export default {
     ...mapState({
       isLoading: (state) => state.feed.isLoading,
       feed: (state) => state.feed.data,
-      error: (state) => state.error,
+      error: (state) => state.feed.error,
     }),
     currentPage() {
       return Number(this.$route.query.page || '1')

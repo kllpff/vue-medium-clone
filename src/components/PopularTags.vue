@@ -39,7 +39,7 @@ export default {
     ...mapState({
       isLoading: (state) => state.tags.isLoading,
       popularTags: (state) => state.tags.data,
-      error: (state) => state.error,
+      error: (state) => state.tags.error,
     }),
   },
 

@@ -2,7 +2,12 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import GlobalFeed from '@/views/GlobalFeed'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
+import TagFeed from '@/views/TagFeed'
 import YourFeed from '@/views/YourFeed'
+import Article from '@/views/Article'
+import CreateArticle from '@/views/CreateArticle'
+import EditArticle from '@/views/EditArticle'
+import Settings from '@/views/Settings'
 
 const routes = [
   {
@@ -23,7 +28,7 @@ const routes = [
   {
     path: '/settings',
     name: 'settings',
-    component: Login,
+    component: Settings,
   },
   {
     path: '/:slug',
@@ -43,22 +48,22 @@ const routes = [
   {
     path: '/tags/:slug',
     name: 'tag',
-    component: GlobalFeed,
+    component: TagFeed,
   },
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: GlobalFeed,
+    component: CreateArticle,
   },
   {
     path: '/articles/:slug',
     name: 'article',
-    component: GlobalFeed,
+    component: Article,
   },
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: GlobalFeed,
+    component: EditArticle,
   },
 ]
 
