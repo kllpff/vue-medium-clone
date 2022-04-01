@@ -8,12 +8,21 @@
             <h4>{{ userProfile.username }}</h4>
             <p>{{ userProfile.bio }}</p>
             <div>
-              follow btn user
+              <button
+                @click="followUser"
+                class="btn btn-sm action-btn btn-outline-secondary"
+              >
+                <i class="ion-plus-round"></i>
+                &nbsp;<span v-if="userProfile.following">Unfollow</span>
+                <span v-else>Follow</span>
+                {{ userProfile.username }}
+              </button>
               <router-link
                 v-if="isCurrentUserProfile"
                 class="btn btn-sm btn-outline-secondary action-btn"
                 :to="{name: 'settings'}"
-                >Edit profile settings
+              >
+                Edit profile settings
               </router-link>
             </div>
           </div>
@@ -107,6 +116,12 @@ export default {
     getUserProfile() {
       this.$store.dispatch(userProfileActionTypes.getUserProfile, {
         slug: this.userProfileSlug,
+      })
+    },
+    followUser() {
+      this.$store.dispatch(userProfileActionTypes.followUser, {
+        slug: this.userProfileSlug,
+        isFollow: this.userProfile.following,
       })
     },
   },

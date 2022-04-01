@@ -10,10 +10,15 @@ export const mutationTypes = {
   getUserProfileStart: '[userProfile] GetUserProfileStart',
   getUserProfileSuccess: '[userProfile] GetUserProfileSuccess',
   getUserProfileFailure: '[userProfile] GetUserProfileFailure',
+
+  followUserStart: '[userProfile] FollowUserStart',
+  followUserSuccess: '[userProfile] FollowUserSuccess',
+  followUserFailure: '[userProfile] FollowUserFailure',
 }
 
 export const actionTypes = {
   getUserProfile: '[userProfile] getUserProfile',
+  followUser: '[userProfile] followUser',
 }
 
 const mutations = {
@@ -28,6 +33,12 @@ const mutations = {
   [mutationTypes.getUserProfileFailure](state) {
     state.isLoading = false
   },
+
+  [mutationTypes.followUserStart]() {},
+  [mutationTypes.followUserSuccess](state, payload) {
+    state.data = payload
+  },
+  [mutationTypes.followUserFailure]() {},
 }
 
 const actions = {
@@ -36,6 +47,21 @@ const actions = {
       context.commit(mutationTypes.getUserProfileStart)
       userProfileApi
         .getUserProfile(slug)
+        .then((userProfile) => {
+          context.commit(mutationTypes.getUserProfileSuccess, userProfile)
+          resolve(userProfile)
+        })
+        .catch(() => {
+          context.commit(mutationTypes.getUserProfileFailure)
+        })
+    })
+  },
+
+  [actionTypes.followUser](context, {slug, isFollow}) {
+    return new Promise((resolve) => {
+      context.commit(mutationTypes.followUserStart)
+      userProfileApi
+        .followUser(slug, isFollow)
         .then((userProfile) => {
           context.commit(mutationTypes.getUserProfileSuccess, userProfile)
           resolve(userProfile)
